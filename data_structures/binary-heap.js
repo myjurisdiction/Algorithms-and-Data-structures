@@ -58,13 +58,13 @@ class MaxBinaryHeap {
       if (rightIdx < length) {
         rightChild = this.container[rightIdx];
         if (
-          (!swapIdx && rightChild > element) ||
-          (swapIdx && rightChild > leftChild)
+          (swapIdx === null && rightChild > element) ||
+          (swapIdx !== null && rightChild > leftChild)
         ) {
           swapIdx = rightIdx;
         }
       }
-      if (!swapIdx) break;
+      if (swapIdx === null) break;
       this.container[rootIdx] = this.container[swapIdx];
       this.container[swapIdx] = element;
       rootIdx = swapIdx;
@@ -146,14 +146,14 @@ class MinBinaryHeap extends MaxBinaryHeap {
       if (rightChildIdx < length) {
         rightChild = this.container[rightChildIdx];
         if (
-          (!swap && rightChild < element) ||
-          (swap && rightChild < leftChild)
+          (swap === null && rightChild < element) ||
+          (swap !== null && rightChild < leftChild)
         ) {
           swap = rightChildIdx;
         }
       }
 
-      if (!swap) break;
+      if (swap === null) break;
       this.container[rootIndex] = this.container[swap];
       this.container[swap] = element;
       rootIndex = swap;
