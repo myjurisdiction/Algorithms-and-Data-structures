@@ -82,6 +82,31 @@ const Graph = class {
       this.list.delete(v);
     }
   }
+
+  get _list() {
+    return this.list;
+  }
+
+  /**
+   * traverse graph
+   */
+
+  _dfs(v) {
+    const result = [];
+    const visited = new Map();
+    const adjacencyList = new Map(this.list);
+    (function _(vertex) {
+      if (!vertex) return; // base case
+      visited.set(vertex, true);
+      result.push(vertex);
+      adjacencyList.get(vertex).forEach((neighbour) => {
+        if (!visited.get(neighbour)) {
+          return _(neighbour);
+        }
+      });
+    })(v);
+    return result;
+  }
 };
 
 let g1 = new Graph();
@@ -97,9 +122,15 @@ g1.addEdge("tokyo", "australia");
 g1.addEdge("tokyo", "pakistan");
 g1.addEdge("india", "usa");
 g1.addEdge("india", "pakistan");
+g1.addEdge("usa", "australia");
+g1.addEdge("india", "russia");
 
-// g1.removeEdge("india", "tokyo");
+g1.removeEdge("india", "tokyo");
 
-g1.removeVertex = "india";
+// g1.removeVertex = "india";
 
-console.log(g1);
+// console.log(g1);
+
+console.log(g1._list);
+
+console.log(g1._dfs('india'));

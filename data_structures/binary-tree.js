@@ -134,6 +134,8 @@ class TraverseBinaryTree extends BinaryTree {
     return container;
   }
 
+  get DFS_preOrder_i() {}
+
   get DFS_postOrder() {
     let container = [];
     function traverse(node) {
