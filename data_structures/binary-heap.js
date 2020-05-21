@@ -1,4 +1,9 @@
-/** This is the Implementation of the max binary heap. */
+/** This is the Implementation of the max binary heap.
+ *
+ * Binary heap has insertion time complexity = O(log n) -> base 2
+ * BH has removal time complexity = O(log n) -> base 2
+ * BH has search of a node time complexity of O(n), (this data structure is not made up for searching)
+ */
 
 class MaxBinaryHeap {
   constructor() {
