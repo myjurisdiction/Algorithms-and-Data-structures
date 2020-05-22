@@ -123,6 +123,7 @@ class TraverseBinaryTree extends BinaryTree {
     return toReturnArray;
   }
 
+  // we can use stack in this case
   get DFS_preOrder() {
     let container = [];
     function traverse(node) {
@@ -131,7 +132,7 @@ class TraverseBinaryTree extends BinaryTree {
       if (node.right) traverse(node.right);
     }
     traverse(this.getRoot);
-    return container;
+    return "preOrder " + container;
   }
 
   get DFS_preOrder_i() {}
@@ -144,7 +145,7 @@ class TraverseBinaryTree extends BinaryTree {
       container.push(node.value);
     }
     traverse(this.getRoot);
-    return container;
+    return "postOrder " + container;
   }
 
   /** If i want to get the sorted binary tree */
@@ -156,7 +157,20 @@ class TraverseBinaryTree extends BinaryTree {
       if (node.right) traverse(node.right);
     }
     traverse(this.getRoot);
-    return container;
+    return "inOrder " + container;
+  }
+  get DFS_i() {
+    // we are using stack in this circumstance
+    let stack = [this.root];
+    let result = [];
+    while (stack.length) {
+      let node = stack.pop();
+      result.push(node.value);
+      if (node.left) stack.push(node.left);
+      if (node.right) stack.push(node.right);
+    }
+
+    return result;
   }
 }
 
@@ -178,20 +192,8 @@ console.log(bt.breadthFirstSearch);
 
 console.log(bt.DFS_preOrder);
 
+console.log(bt.DFS_i);
+
 console.log(bt.DFS_postOrder);
 
 console.log(bt.DFS_inOrder);
-
-// (async function () {
-//   // first this loop will run
-//   console.log('happy');
-//   for  await(let i of insertArray) {
-//     console.log("hi");
-//   }
-
-//   // then this loop will be run
-//   console.log('sad')
-//   for  await (let i of insertArray) {
-//     console.log("by");
-//   }
-// })();

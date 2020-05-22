@@ -91,46 +91,108 @@ const Graph = class {
    * traverse graph
    */
 
-  _dfs(v) {
-    const result = [];
-    const visited = new Map();
-    const adjacencyList = new Map(this.list);
+  dfs_recursive(startVertex) {
+    let container = [];
+    let visitedVerticesList = new Map();
+    const adjacentList = new Map(this.list);
     (function _(vertex) {
-      if (!vertex) return; // base case
-      visited.set(vertex, true);
+      if (!vertex) return;
+      visitedVerticesList.set(vertex, true);
+      container.push(vertex);
+      adjacentList.get(vertex).forEach((neighbour) => {
+        if (!visitedVerticesList.get(neighbour)) return _(neighbour);
+      });
+    })(startVertex);
+
+    return container;
+  }
+
+  dfs_iterative(startVertex) {
+    let stack = [startVertex];
+    let result = [];
+    let visited = new Map();
+    visited.set(startVertex, true);
+
+    while (stack.length) {
+      // console.log(stack);
+      let vertex = stack.pop();
       result.push(vertex);
-      adjacencyList.get(vertex).forEach((neighbour) => {
+      this.list.get(vertex).forEach((neighbour) => {
         if (!visited.get(neighbour)) {
-          return _(neighbour);
+          visited.set(neighbour, true);
+          stack.push(neighbour);
         }
       });
-    })(v);
+    }
+    return result;
+  }
+
+  bfs_iterative(start) {
+    let queue = [start];
+    let result = [];
+    let visited = new Map();
+    visited.set(start, true);
+    while(queue.length) {
+      start = queue.shift();
+      result.push(start);
+      this.list.get(start).forEach( connection => {
+        if(!visited.get(connection)) {
+          visited.set(connection, true);
+          queue.push(connection);
+        }
+      })
+    }
     return result;
   }
 };
 
 let g1 = new Graph();
-g1.addVertex = "tokyo";
-g1.addVertex = "india";
-g1.addVertex = "pakistan";
-g1.addVertex = "russia";
-g1.addVertex = "usa";
-g1.addVertex = "australia";
+g1.addVertex = "A";
+g1.addVertex = "B";
+g1.addVertex = "C";
+g1.addVertex = "D";
+g1.addVertex = "E";
+g1.addVertex = "F";
 
-g1.addEdge("tokyo", "india");
-g1.addEdge("tokyo", "australia");
-g1.addEdge("tokyo", "pakistan");
-g1.addEdge("india", "usa");
-g1.addEdge("india", "pakistan");
-g1.addEdge("usa", "australia");
-g1.addEdge("india", "russia");
+g1.addEdge("A", "C");
+g1.addEdge("A", "B");
+g1.addEdge("D", "B");
+g1.addEdge("D", "E");
+g1.addEdge("D", "F");
+g1.addEdge("E", "D");
+g1.addEdge("E", "F");
+g1.addEdge("F", "E");
+g1.addEdge("F", "D");
+g1.addEdge("F", "C");
+g1.addEdge("C", "F");
+g1.addEdge("C", "A");
 
-g1.removeEdge("india", "tokyo");
+// g1.removeEdge("keshav", "mummy");
 
-// g1.removeVertex = "india";
+// g1.removeVertex = "mummy";
 
 // console.log(g1);
 
 console.log(g1._list);
 
-console.log(g1._dfs('india'));
+console.log(g1.dfs_recursive("A"));
+
+console.log(g1.dfs_iterative("A"));
+
+console.log(g1.bfs_iterative("A"));
+
+/**
+ * 
+(function (v) {
+  let count = 0;
+  let matrix = new Array();
+  for (let i = 0; i < v; i++) {
+    matrix[i] = new Array(v);
+    for (let j = 0; j < v; j++) {
+      matrix[i][j] = count++;
+    }
+  }
+  console.log(matrix);
+})(10);
+ */
+
