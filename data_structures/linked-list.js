@@ -38,6 +38,15 @@
          }
      }
 
+     get reverse() {
+         let temp = this.head;
+         (function _(node) {
+            if(!node) return;
+            _(node.next);
+            console.log(node.val);
+         })(temp)
+     }
+
      insert(val, position) {
          const newNode = new Node(val);
          if(position < 0 || position > this.length) return 'Invalid position';
@@ -76,6 +85,10 @@
 
 node.print;
 
-console.log(node.insert('I am a new Entry', 4));
+console.log('reverse the list -- \n')
 
-node.print;
+node.reverse;
+
+// console.log(node.insert('I am a new Entry', 4));
+
+// node.print;
