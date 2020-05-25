@@ -64,11 +64,11 @@ const PriorityQueue = class {
           (swapIndex === null && element.priority > rightChild.priority) ||
           (swapIndex !== null && rightChild.priority < leftChild.priority)
         ) {
-            swapIndex = rightChildIndex;
+          swapIndex = rightChildIndex;
         }
       }
 
-      if(swapIndex === null) break;
+      if (swapIndex === null) break;
       this.queue[rootIndex] = this.queue[swapIndex];
       this.queue[swapIndex] = element;
       rootIndex = swapIndex;
@@ -98,4 +98,3 @@ console.log(priorityQueue);
 console.log(priorityQueue.dequeue);
 
 console.log(priorityQueue);
-

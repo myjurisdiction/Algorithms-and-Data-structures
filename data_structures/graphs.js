@@ -147,52 +147,51 @@ const Graph = class {
 };
 
 let g1 = new Graph();
-g1.addVertex = "A";
-g1.addVertex = "B";
-g1.addVertex = "C";
-g1.addVertex = "D";
-g1.addVertex = "E";
-g1.addVertex = "F";
+g1.addVertex = "kirtu";
+g1.addVertex = "keshav";
+g1.addVertex = "neha";
+g1.addVertex = "zeny";
+g1.addVertex = "danish";
+g1.addVertex = "sam";
 
-g1.addEdge("A", "C");
-g1.addEdge("A", "B");
-g1.addEdge("D", "B");
-g1.addEdge("D", "E");
-g1.addEdge("D", "F");
-g1.addEdge("E", "D");
-g1.addEdge("E", "F");
-g1.addEdge("F", "E");
-g1.addEdge("F", "D");
-g1.addEdge("F", "C");
-g1.addEdge("C", "F");
-g1.addEdge("C", "A");
+g1.addEdge("kirtu", "keshav");
+g1.addEdge("kirtu", "zeny");
+g1.addEdge("kirtu", "danish");
+g1.addEdge("keshav", "zeny");
+// g1.addEdge("keshav");
+// g1.addEdge("E", "D");
+// g1.addEdge("E", "F");
+// g1.addEdge("F", "E");
+// g1.addEdge("F", "D");
+// g1.addEdge("F", "C");
+// g1.addEdge("C", "F");
+// g1.addEdge("C", "A");
 
-// g1.removeEdge("keshav", "mummy");
+g1.removeEdge("kirtu", "zeny");
 
 // g1.removeVertex = "mummy";
 
 // console.log(g1);
 
+console.log(g1._list.get('kirtu').length);
 console.log(g1._list);
 
-console.log(g1.dfs_recursive("A"));
+// console.log(g1.dfs_recursive("A"));
 
-console.log(g1.dfs_iterative("A"));
+// console.log(g1.dfs_iterative("A"));
 
-console.log(g1.bfs_iterative("A"));
+// console.log(g1.bfs_iterative("A"));
 
-/**
- * 
+
 (function (v) {
   let count = 0;
   let matrix = new Array();
   for (let i = 0; i < v; i++) {
     matrix[i] = new Array(v);
     for (let j = 0; j < v; j++) {
-      matrix[i][j] = count++;
+      matrix[i][j] = 'keshav';
     }
   }
   console.log(matrix);
-})(10);
- */
+})(100);
 
