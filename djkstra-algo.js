@@ -1,5 +1,9 @@
 /**
  *  We are using Heap data structure.
+ *
+ * Dijkstra’s algorithm doesn’t work for graphs with negative weight edges. For graphs with negative weight edges, Bellman–Ford algorithm can be used, we will soon be discussing it as a separate post.
+ *
+ *
  */
 
 class PriorityQueue {
@@ -157,21 +161,33 @@ const Dijkstra = class {
 };
 
 const _instance = new Dijkstra();
+// _instance.addVertex("A");
+// _instance.addVertex("B");
+// _instance.addVertex("C");
+// _instance.addVertex("D");
+// _instance.addVertex("E");
+// _instance.addVertex("F");
+
+// _instance.addEdge("A", "B", 4);
+// _instance.addEdge("A", "C", 2);
+// _instance.addEdge("C", "F", 4);
+// _instance.addEdge("C", "D", 2);
+// _instance.addEdge("F", "D", 1);
+// _instance.addEdge("F", "E", 1);
+// _instance.addEdge("B", "E", 3);
+
 _instance.addVertex("A");
 _instance.addVertex("B");
 _instance.addVertex("C");
 _instance.addVertex("D");
 _instance.addVertex("E");
-_instance.addVertex("F");
 
-_instance.addEdge("A", "B", 4);
-_instance.addEdge("A", "C", 2);
-_instance.addEdge("C", "F", 4);
-_instance.addEdge("C", "D", 2);
-_instance.addEdge("F", "D", 1);
-_instance.addEdge("F", "E", 1);
-_instance.addEdge("B", "E", 3);
+_instance.addEdge("A", "B", 2);
+_instance.addEdge("B", "E", 2);
+_instance.addEdge("B", "C", 3);
+_instance.addEdge("E", "C", 2);
+_instance.addEdge("C", "D", 1);
 
 console.log(_instance);
 
-console.log(_instance.shortestPath("C", "E"));
+console.log(_instance.shortestPath("A", "D"));

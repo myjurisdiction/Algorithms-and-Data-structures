@@ -55,6 +55,7 @@ const matrix_multiplication = (m1, m2) => {
         result[i] = new Array(col);
         for(let j = 0; j < col; j++) {
             result[i][j] = 0;
+            console.log(result);
             for(let k = 0; k < col; k++) {
                 result[i][j] += m1[i][k] * m2[k][j];
             }
