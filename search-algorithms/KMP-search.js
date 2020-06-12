@@ -62,7 +62,7 @@ const KMP = (string, pattern) => {
       count += 1;
       patternIndex = PSA[patternIndex - 1];
     } else if (pattern[patternIndex] !== string[strIndex]) {
-      if (patternIndex) {
+      if (patternIndex) {// when patternIndex is not equal to  Zero
         patternIndex = PSA[patternIndex - 1];
       } else {
         strIndex++;

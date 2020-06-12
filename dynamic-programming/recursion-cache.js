@@ -2,8 +2,6 @@
  * Concept of memoization -> caching the values
  */
 
-
-
 function fib(n, cache = [undefined, 1, 1]) {
     if(cache[n]) return cache[n];
     let res = fib(n - 1, cache) + fib(n - 2, cache);
