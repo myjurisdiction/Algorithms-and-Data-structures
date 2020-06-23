@@ -1,7 +1,6 @@
 const binary_search = (array, value) => {
   let start = 0;
   let end = array.length - 1;
-  if (array[start] === value || array[end] === value) return "FOUND !!";
   let middle = Math.floor((start + end) / 2);
   while (array[middle] !== value && start <= end) {
     if (value < array[middle]) end = middle - 1;

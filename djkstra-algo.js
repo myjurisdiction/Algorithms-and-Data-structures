@@ -138,7 +138,9 @@ const Dijkstra = class {
 
     while (priorityQueue.queue.length) {
       let smallest = priorityQueue.dequeue().value;
+
       if (smallest === end) {
+        // this code is to return the path traced.
         while (previous[smallest]) {
           path.push(smallest);
           smallest = previous[smallest];
