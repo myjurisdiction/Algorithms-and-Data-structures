@@ -108,18 +108,19 @@ const alphabetPosition = (string) => {
 
 console.log(alphabetPosition("The sunset sets at twelve o' clock."));
 
-function consFunc(name, hobby) {
+/**
+ * function consFunc(name, hobby) {
   this.desc = (job) => {
     return `Hi ${name}, You like ${hobby} and you are also an ${job}`;
   };
 }
 
-// const _exec = consFunc.prototype.desc;
+const _exec = consFunc.prototype.desc;
 
-// consFunc.prototype.desc = function () {
-//     console.log('This is called a function hijacking ....');
-//     return _exec.apply(this, arguments);
-// }
+consFunc.prototype.desc = function () {
+    console.log('This is called a function hijacking ....');
+    return _exec.apply(this, arguments);
+}
 
 consFunc.prototype.greet = function (name) {
     return `Hi ${name}.`;
@@ -128,3 +129,79 @@ consFunc.prototype.greet = function (name) {
 let exec = new consFunc('Spartacus', 'Dancing');
 console.log(exec.desc('Engineer'));
 console.log(exec.greet('spartacus'));
+
+ */
+
+// convert a number to it's binary;
+
+// let num = 12;
+// // 1
+// num % 2 => 12 % 2 = 0
+// [0]
+// num = num /2 => 12 = 12 / 2 = 6
+// // 2 -> num = 6
+
+// 6 % 2 = 0,
+// [0, 0]
+// num = 6 / 2 = 3
+
+// // 3, num = 3
+
+// 3 % 2 = 1;
+// [0, 0 , 1],
+// 3 / 2 = 1
+
+// // 4 num = 1;
+
+// 1 % 2 = 0;
+// [0,  0 , 1,  0]
+
+// 1 / 2
+
+function decimalToBinary(number) {
+  const array = new Array();
+  for (let i = 0; number > 0; i++) {
+    array[i] = number % 2;
+    number = Math.floor(number / 2);
+  }
+
+  return parseInt(array.reverse().join(""));
+}
+
+console.log(decimalToBinary(12));
+
+
+function binaryToDecimal(number) {
+  let dec_value = 0, base = 1, temp = number;
+  while(temp) {
+    let last_digit = temp % 10;
+    temp = Math.floor(temp / 10);
+
+    dec_value += last_digit * base;
+    base = base * 2;
+  }
+  return dec_value;
+}
+
+console.log(binaryToDecimal(decimalToBinary(12)));
+
+
+// function addBinary(a,b) {
+//   let sum = a + b;
+//   const array = [];
+//   for(let i = 0; sum > 0; i++) {
+//       array[i] = sum % 2;
+//       sum = Math.floor(sum / 2);
+//   }
+  
+//   return array.reverse().join('');
+// }
+
+
+
+function addBinary(a,b){
+  return (a+b).toString(2)
+}
+
+console.log(addBinary(6, 6));
+

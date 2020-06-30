@@ -1,83 +1,61 @@
-const EventEmitter = require("events");
-
-class MyEmitter extends EventEmitter {}
-
-const myEmitter = new MyEmitter();
-
-myEmitter.on("anyName", function (name, age) {
-  setTimeout(() => {
-    console.log("An event has been registered...");
-    console.log(`Triggered By: ${name}. Age: ${age}.`);
-    console.log("meaning of this ", this); // when we use arrow function then 'this' no longer reference the instance of EventEmitter.
-  }, 1000);
-  // we can put any logic here and wait for the event 'anyName' to be listened.
-});
-
 /**
-  myEmitter.emit('anyName', () => {
-    console.log('listened successfully');
-});
+ * The async_hooks module provides an API to track asynchronous resources in Node.js. An async resource is an object with a callback function associated with it. Because of Node’s nature, almost all things happening under the hood in Node.js are asynchronous calls, and a lot of these async resources are created.
+Examples of async resources are Promises, Timeouts, Immediates (when calling setImmediate), TickObject (when calling process.nextTick), TCPWRAP (when creating a server).
  */
-
-// we can also pass arguments to the registered event.
-
-// myEmitter.emit("anyName", "sam", 24);
-
-/**
- * The EventEmitter calls all listeners synchronously in the order in which they were registered. This ensures the proper sequencing of events and helps avoid race conditions and logic errors. When appropriate, listener functions can switch to an asynchronous mode of operation using the setImmediate() or process.nextTick() methods:
- */
-
-myEmitter.on("_a", function listener1() {
-  console.log("sequence one.");
-});
-
-myEmitter.prependListener("_a", function listener3(...args) {
-  process.nextTick(() => {
-    console.log("sequence three.");
-    const params = args.join(", ");
-    console.log(`I have the following parameters: ${params}`);
-  });
-});
-
-myEmitter.on("_a", function listener2(arg1, arg2) {
-  console.log("sequence two");
-  console.log(`I have following arguments: ${arg1}, ${arg2}`);
-});
-
-// myEmitter.emit("_a", "a", "b", "c", "d");
-
-// capture rejections.
-
-const ee = new MyEmitter({ captureRejections: true });
-
-ee.on("async", async (name) => {
-  if (name) console.log(`Hi, i am ${name}`);
-  else throw new Error("something went wrong !!");
-});
-
-// ee.emit("async");
-
-/**
- * 
- Back to async hooks
- */
-
-//The async_hooks module provides an API to track asynchronous resources. It can be accessed using:
 
 const async_hooks = require("async_hooks");
+const fs = require("fs");
+const util = require("util");
 
-const eid = async_hooks.executionAsyncId();
+// the API provides us with following events:
 
-const tid = async_hooks.triggerAsyncId();
+// 1: init: called when an async resource is initialized
+// 2: before/after : called just before/after the callback associated with the async resource is executed.
+// 3: destroy: called after the resource is destroyed.
+// 4: promiseResolve : called when the resolve function of the promise contructor is invoked
 
-console.log(eid, tid);
+const asyncHooks = async_hooks.createHook({ init, destroy });
+asyncHooks.enable();
 
-// const asyncHook = async_hooks.createHook({
-//   init,
-//   before,
-//   after,
-//   destroy,
-//   promiseResolve,
-// });
+function init(asyncId, type, triggerAsyncId, resource) {
+  // code
+  //   console.log(asyncId, type);
+  debug(asyncId, type);
+}
 
-// console.log(asyncHook);
+init(); // this code for now throws this error -> Maximum call stack size exceeded
+
+function destroy(asyncId) {
+  // code
+}
+
+// The init callback gets these parameters
+
+// 1: asyncId : unique ID of the async resource.
+// 2: type : a string representing the type of async resource (ex, Promise, Timeout, Immediate, TCPWRAP, etc);
+
+// 3: triggerAsyncId: the unique ID of the async resource in whose execution context this async resource was created.
+
+// 4: resource: an object that represents the actual async resource and contains information about it.
+
+// *** The before, after, destroy, and PromiseResolve callbacks only get the asyncId of the resource.
+
+
+
+function debug(...args) {
+    fs.writeFileSync(1, `${util.format(...args)}\n`, { flag: "a" }); // this is a synchrounous console function
+  }
+  
+  (function () {
+    setTimeout(() => {
+      console.log("Hi there");
+    }, 1000);
+  })();
+  
+  const _promise = async () => {
+    "hey user >>";
+  };
+  
+  (async function () {
+      await _promise();
+  })();
