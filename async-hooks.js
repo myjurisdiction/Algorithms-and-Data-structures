@@ -36,7 +36,7 @@ function destroy(asyncId) {
 
 // 3: triggerAsyncId: the unique ID of the async resource in whose execution context this async resource was created.
 
-// 4: resource: an object that represents the actual async resource and contains information about it.
+// 4: resource: an object that represents the actual async ressource and contains information about it.
 
 // *** The before, after, destroy, and PromiseResolve callbacks only get the asyncId of the resource.
 
