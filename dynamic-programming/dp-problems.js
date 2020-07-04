@@ -10,13 +10,13 @@ const printerString = (s) => {
     if (!(i in colorCodeObject)) errorCount++;
   }
 
-  console.log(errorCount);
+  // console.log(errorCount);
   return errorCount / strLength;
 };
 
-console.log(
-  printerString("aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbmmmmmmmmmmmmmmmmmmmxyz")
-);
+// console.log(
+//   printerString("aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbmmmmmmmmmmmmmmmmmmmxyz")
+// );
 
 const calculateFactors = (number) => {
   const factors = [number];
@@ -49,7 +49,7 @@ const GCD = (n1, n2) => {
   return greatest_common;
 };
 
-console.log(GCD(100, 10));
+// console.log(GCD(100, 10));
 
 // This is eculedian government.
 
@@ -63,7 +63,7 @@ const LCM = (a, b) => {
   return (a * b) / recursive_GCD(a, b);
 };
 
-console.log("LCM is ....", LCM(12, 20));
+// console.log("LCM is ....", LCM(12, 20));
 
 /** Facebook likes function */
 
@@ -83,7 +83,7 @@ const likes = (names) => {
   }
 };
 
-console.log(likes(names1));
+// console.log(likes(names1));
 
 const alphabetPosition = (string) => {
   string = string.toLowerCase();
@@ -106,7 +106,7 @@ const alphabetPosition = (string) => {
   return result;
 };
 
-console.log(alphabetPosition("The sunset sets at twelve o' clock."));
+// console.log(alphabetPosition("The sunset sets at twelve o' clock."));
 
 /**
  * function consFunc(name, hobby) {
@@ -168,12 +168,13 @@ function decimalToBinary(number) {
   return parseInt(array.reverse().join(""));
 }
 
-console.log(decimalToBinary(12));
-
+// console.log(decimalToBinary(12));
 
 function binaryToDecimal(number) {
-  let dec_value = 0, base = 1, temp = number;
-  while(temp) {
+  let dec_value = 0,
+    base = 1,
+    temp = number;
+  while (temp) {
     let last_digit = temp % 10;
     temp = Math.floor(temp / 10);
 
@@ -183,8 +184,7 @@ function binaryToDecimal(number) {
   return dec_value;
 }
 
-console.log(binaryToDecimal(decimalToBinary(12)));
-
+// console.log(binaryToDecimal(decimalToBinary(12)));
 
 // function addBinary(a,b) {
 //   let sum = a + b;
@@ -193,15 +193,53 @@ console.log(binaryToDecimal(decimalToBinary(12)));
 //       array[i] = sum % 2;
 //       sum = Math.floor(sum / 2);
 //   }
-  
+
 //   return array.reverse().join('');
 // }
 
-
-
-function addBinary(a,b){
-  return (a+b).toString(2)
+function addBinary(a, b) {
+  return (a + b).toString(2);
 }
 
-console.log(addBinary(6, 6));
+// console.log(addBinary(6, 6));
 
+// *** PROBLEM
+function solution(str) {
+  const array = new Array();
+  while (str.length) {
+    if (str.length % 2 !== 0) str = str.concat("_");
+    array.push(str.slice(0, 2));
+    str = str.substring(2);
+  }
+  return array;
+}
+
+// another solution (clever one)
+function solution_V2(str) {
+  return (str.length % 2 ? str + "_" : str).match(/../g);
+}
+
+console.log(solution_V2("abhishe"));
+
+console.log(solution("abhishe"));
+
+/**
+ * IMPORTANT CODE
+ * const paragraph = 'The quick brown fox jumped over the lazy dog. It barked';
+
+const regex = /.../g;
+
+const found =  paragraph.match(regex);
+console.log(found);
+ */
+
+
+//  const array = Array.from({ length : 20}, () => Math.floor(Math.random() * 30));
+
+//  const object = new Object();
+
+//  for(let i of array) {
+//    object[i] = (object[i] || 0) + 1;
+//  }
+
+//  console.log(object);
