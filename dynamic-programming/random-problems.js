@@ -1,54 +1,6 @@
-// const tickets = (array) => {
-//   let total = 0, change = 0, response;
-//   for(let price of array) {
-//     total += 25;
-//     change = price -25;
-//     total -= change;
+"use strict";
 
-//     if(total < change) response =  'NO';
-//     else response = 'YES';
-//   }
-//   return response;
-// }
-
-// console.log(tickets([25, 25, 50, 50, 100]));
-
-// function Clerk(name) {
-//   this.name = name;
-
-//   this.money = {
-//     25 : 0,
-//     50 : 0,
-//     100: 0
-//   };
-
-//   this.sell = function(element, index, array) {
-//     this.money[element]++;
-
-//     switch (element) {
-//       case 25:
-//         return true;
-//       case 50:
-//         this.money[25]--;
-//         break;
-//       case 100:
-//         this.money[50] ? this.money[50]-- : this.money[25] -= 2;
-//         this.money[25]--;
-//         break;
-//     }
-//     console.log(this.money);
-//     return this.money[25] >= 0;
-//   };
-// }
-
-// function tickets(peopleInLine){
-//   var vasya = new Clerk("Vasya");
-//   return peopleInLine.every(vasya.sell.bind(vasya)) ? "YES" : "NO";
-// }
-
-// console.log(tickets([25, 25, 50, 50, 100]));
-
-function _() {
+function Clerk() {
   this.denominations = {
     25: 0,
     50: 0,
@@ -71,19 +23,18 @@ function _() {
         this.denominations[25]--;
         break;
     }
-    console.log(this.denominations);
     return this.denominations[25] >= 0;
   };
 }
 
 function tickets(peopleInLine) {
-  const vasya = new _();
+  const vasya = new Clerk();
   return peopleInLine.every(vasya.validateDenomination.bind(vasya))
     ? "YES"
     : "NO";
 }
 
-console.log(tickets([25, 25, 100]));
+// console.log(tickets([25, 25, 100]));
 
 function expression(number, operation) {
   return !operation ? number : operation(number);
@@ -105,12 +56,11 @@ function plus(x) {
 
 function dividedBy(x) {
   return function (y) {
-    console.log(y, x);
     return y / x;
   };
 }
 
-six(dividedBy(two()));
+// six(dividedBy(two()));
 
 function decimalToBinary(number) {
   const array = new Array();
@@ -121,7 +71,7 @@ function decimalToBinary(number) {
   return array.reverse().join("");
 }
 
-console.log(decimalToBinary(1234));
+// console.log(decimalToBinary(1234));
 
 function countBits(n) {
   const bits = decimalToBinary(n);
@@ -137,36 +87,9 @@ function countBits(n) {
 // *** THIS is a very clever solution
 const countBits_V2 = (n) => n.toString(2).split("0").join("").length;
 
-console.log(countBits_V2(1234));
+// console.log(countBits_V2(1234));
 
 // ***  Important Proplem -> Valid Braces
-
-// function validBraces(string) {
-//   let symbolId = {
-//     "{": "A",
-//     "}": "A",
-//     "(": "B",
-//     ")": "B",
-//     "[": "C",
-//     "]": "C",
-//   };
-//   const stack = new Array;
-//   for (let i of string) {
-//     if (i === "(" || i === "{" || i === "[") {
-//       stack.push(symbolId[i]);
-//     } else if (i === ")" || i === "}" || i === "]") {
-//       if (
-//         stack.length &&
-//         symbolId.hasOwnProperty(i) &&
-//         stack[stack.length - 1] === symbolId[i]
-//       ) {
-//         stack.pop();
-//       }
-//     }
-//   }
-//   return stack.length ? false : true;
-// }
-
 function validBraces(braces) {
   const symbols = {
     "(": ")",
@@ -180,23 +103,10 @@ function validBraces(braces) {
     if (p === "(" || p === "{" || p === "[") stack.push(p);
     else {
       let last = stack.pop();
-      if(p!== symbols[last]) return false;
+      if (p !== symbols[last]) return false;
     }
   }
   return stack.length ? false : true;
 }
 
 console.log(validBraces("[(){}]"));
-
-// const testSuite = {
-//   1: "(){}[]",
-//   2: "([{}])",
-//   3: "(}",
-//   4: "[(])",
-//   5: "[({})](]",
-// };
-
-// const resultArray = [];
-// for (let i in testSuite) {
-//   console.log(validBraces.call(testSuite));
-// }
