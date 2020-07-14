@@ -216,3 +216,90 @@ function smallestInteger() {
 const instance1 = smallestInteger.bind(proto_object);
 console.log(instance1());
   */
+
+  /**   
+   *  -> MAX HEAP USING FUNCTION CONSTRUCTOR
+   * 
+   * 
+   * function MaxHeap() {
+  this.container = new Array();
+}
+
+MaxHeap.prototype.bubbleUp = function () {
+  let index = this.container.length - 1;
+  let element = this.container[index];
+
+  while (index > 0) {
+    let parentIdx = Math.floor((index - 1) / 2);
+    let parentEl = this.container[parentIdx];
+    if (parentEl >= element) break;
+    this.container[parentIdx] = element;
+    this.container[index] = parentEl;
+    index = parentIdx;
+  }
+};
+
+MaxHeap.prototype.insert = function (value) {
+  this.container.push(value);
+  this.bubbleUp();
+  return this.container;
+};
+
+MaxHeap.prototype.extractMax = function () {
+  const max = this.container[0];
+  const last = this.container.pop();
+  this.container[0] = last;
+  this.sinkDown();
+  return max;
+};
+
+MaxHeap.prototype.sinkDown = function () {
+  let rootIndex = 0;
+  const element = this.container[0];
+  const length = this.container.length;
+
+  while (true) {
+    let leftIdx = 2 * rootIndex + 1;
+    let rightIdx = 2 * rootIndex + 2;
+    let pointer = null;
+
+    let leftChild, rightChild;
+    if (leftIdx < length) {
+      leftChild = this.container[leftIdx];
+      if (leftChild > element) {
+        pointer = leftIdx;
+      }
+    }
+
+    if (rightIdx < length) {
+      rightChild = this.container[rightIdx];
+      if (
+        (pointer === null && rightChild > element) ||
+        (pointer !== null && rightChild > leftChild)
+      ) {
+        pointer = rightIdx;
+      }
+    }
+
+    if (pointer === null) break;
+    this.container[rootIndex] = this.container[pointer];
+    this.container[pointer] = element;
+    rootIndex = pointer;
+  }
+};
+
+const m_heap = new MaxHeap();
+
+const arr = Array.from({ length: 10 }, () => Math.floor(Math.random() * 100));
+
+console.log(arr);
+
+for (let el of arr) {
+  m_heap.insert(el);
+}
+console.log(m_heap.container);
+
+m_heap.extractMax();
+
+console.log(m_heap.container);
+   */

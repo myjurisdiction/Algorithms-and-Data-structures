@@ -26,20 +26,20 @@ function _hash() {
   });
 }
 
- doRequest();
+doRequest();
 
- fs.writeFile("spartacus.txt", "I am a legeng", (err) => {
-   if (err) throw new Error("Something went wrong !!");
-   console.log("Create File: ", Date.now() - start);
- });
+fs.writeFile("spartacus.txt", "I am a legeng", (err) => {
+  if (err) throw new Error("Something went wrong !!");
+  console.log("Create File: ", Date.now() - start);
+});
 
- fs.readFile("spartacus.txt", "utf-8", (err, data) => {
-   if (err) throw new Error("Something went wrong !!");
-   console.log('Read File: ', Date.now() - start);
- });
+fs.readFile("spartacus.txt", "utf-8", (err, data) => {
+  if (err) throw new Error("Something went wrong !!");
+  console.log("Read File: ", Date.now() - start);
+});
 
- _hash();
- _hash();
- _hash(); 
- _hash();
- _hash();
+_hash();
+_hash();
+_hash();
+_hash();
+_hash();
