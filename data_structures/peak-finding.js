@@ -107,14 +107,6 @@ const matrix = get_2D_matrix(5, 5);
  * 6. (base case) when you have a single column find the global max.
  */
 
-// const find_2d_peak = (matrix) => {
-//   let rows = matrix.length;
-//   let cols = matrix[0].length;
-//   let mid = Math.floor(cols / 2);
-//   let max = 0;
-//   let max_index = findMaxIndex(matrix, );
-// };
-
 function _main(matrix) {
   const rows = matrix.length;
   const cols = matrix[0].length;
@@ -126,13 +118,14 @@ function _main(matrix) {
 function find_2d_peak(matrix, rows, cols, mid) {
   const { max, max_index } = findMaxIndex(matrix, rows, mid);
   // base case
-  if (mid === 0 || mid === cols - 1) return max;
+  if (mid === 0 || mid === cols - 1)
+    return { peak: max, at_row: max_index, at_column: mid };
   // if max is really a peak return max after comparing it with the nearby elements
   else if (
     max >= matrix[max_index][mid - 1] &&
     max >= matrix[max_index][mid + 1]
   )
-    return max;
+    return { peak: max, at_row: max_index, at_column: mid };
   // if max -> (i, j) < (i, j - 1);
   else if (max < matrix[max_index][mid - 1]) {
     mid -= Math.floor(mid / 2);
