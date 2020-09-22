@@ -2,8 +2,6 @@
 
 const array = [1, 3, 20, 4, 1, 0];
 
-// console.log(array);
-
 // this has a worst cae complexity of O(n)
 const one_dimensional_peak_finding = (array) => {
   const peaks = [];
