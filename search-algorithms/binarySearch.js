@@ -1,36 +1,43 @@
-function binarySearch(array, searchElement) {
-  let start = 0;
-  let end = array.length - 1;
-  let middle = Math.floor((start + end) / 2);
+/**
+ * 
+ * @param {array} sortedA 
+ * @param {integer} number 
+ * @returns integer
+ * 
+ * 
+ * Time complexity for Binary Search log n (base is 2)
+ */
 
-  while (array[middle] !== searchElement && start <= end) {
-    if (searchElement < array[middle]) {
-      end = middle - 1;
-    } else {
-      start = middle + 1;
+function BinarySearch(sortedA, number) {
+  let start = 0;
+  let end = sortedA.length - 1;
+  function search(sortedA, number, start, end) {
+    // perform  the main logic here
+    if (start <= end) {
+      // ensures that the middle index is correctly calculated by adjusting for the start index
+      const middle = Math.floor(start + (end - start) / 2);
+      if (sortedA[middle] === number) {
+        // item found in the array
+        return middle;
+      }
+
+      if (number < sortedA[middle]) {
+        // ensures that the function correctly returns the index of the found element.
+        return search(sortedA, number, start, middle - 1);
+      }
+      //   ensures that the function correctly returns the index of the found element.
+      return search(sortedA, number, middle + 1, end);
     }
 
-    middle = Math.floor((start + end) / 2);
+    // when item does not exist in the array
+    return null;
   }
-  return array[middle] === searchElement ? "Found !!" : "Not found";
+
+  return search(sortedA, number, start, end);
 }
 
-const array = Array.from({ length: 10 }, () => Math.floor(Math.random() * 100));
+const sampleArry = Array.from({ length: 100 }, (a, b) => b + 1);
 
-console.log("Here is the input array : ", array);
+const result = BinarySearch(sampleArry, 37);
 
-console.log(binarySearch(array, 30));
-
-// A recursive solution
-
-function recursive_binary_search(array, start, end, value) {
-  if (start <= end) {
-    let middle = Math.floor((start + end) / 2);
-    if (array[middle] === value) return middle;
-    else if (value < array[middle])
-      return recursive_binary_search(array, start, middle - 1, value);
-    else return recursive_binary_search(array, middle + 1, end, value);
-  } else return "Not found !!";
-}
-
-console.log(recursive_binary_search(array, 0, array.length - 1, 30));
+console.log(`result`, result);

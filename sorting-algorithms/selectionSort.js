@@ -1,37 +1,54 @@
-const sampleArrayObject = require("./sampleArrays");
+const SAMPLE_ARR = Array.from({ length: 20 }, () =>
+  Math.floor(Math.random() * 1000)
+);
 
-/**
- * TIME COMPLEXITY -> BEST CASE: O(n power 2) -> (when we have nearly sorted data), WORST CASE: O(n power 2), SPACE COMPLEXITY: O(1)
- * 
- * 
- * How this algorithm works;
- *
- *  i = 0
- * [9, 2, 6, 5]  -> minIndex = i;
- *     j = 1
- * if(array[minIndex] > array[j]) -> minIndex = j;
- *
- * 9, 2  -> minIndex = 1
- * 2, 6  -> minIndex=  1
- * 2, 5 -> minIndex = 1
- *
- * when the inner loop completes we swipe.
- * at this point minIndex = 1, and i = 0;
- * [array[minIndex], array[i]] = [array[i], array[minIndex]]
- * 
- */
+console.log(`Sample Array`, SAMPLE_ARR);
 
-const selectionSort = (array) => {
-  for (let i = 0; i < array.length; i++) {
-    let minIndex = i;
-    for (let j = i + 1; j < array.length; j++) {
-      if (array[minIndex] > array[j]) {
-        minIndex = j;
+function SelectionSort(arr, type) {
+  // Its an in-place sorting algortihm
+  if (type === "ASC") {
+    sortInAscOrder();
+  } else {
+    sortInDesc();
+  }
+
+  function sortInAscOrder() {
+    for (let i = 0; i < arr.length; i++) {
+      let minIndex = i;
+      // find the minimum index by compaing with other elements in the array
+      for (let j = i + 1; j < arr.length; j++) {
+        if (arr[j] < arr[minIndex]) {
+          minIndex = j;
+        }
+      }
+
+      // once found then swap the i with the minIndex
+      if (i !== minIndex) {
+        [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
       }
     }
-    [array[i], array[minIndex]] = [array[minIndex], array[i]];
   }
-  return array;
-};
 
-console.log(selectionSort(sampleArrayObject.a3));
+  function sortInDesc() {
+    for (let i = 0; i < arr.length; i++) {
+      let maxIndex = i;
+      // find the maximum index by comparing with other elements in the array
+      for (let j = i + 1; j < arr.length; j++) {
+        if (arr[j] > arr[maxIndex]) {
+          maxIndex = j;
+        }
+      }
+
+      // once found then swap the i with the maxIndex
+      if (i !== maxIndex) {
+        [arr[i], arr[maxIndex]] = [arr[maxIndex], arr[i]];
+      }
+    }
+  }
+
+  return arr;
+}
+
+const result = SelectionSort(SAMPLE_ARR);
+
+console.log(`Result :`, result);
